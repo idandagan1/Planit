@@ -6,3 +6,661 @@ body {
 a {
   color: #00B7FF;
 }
+
+nav, section, article, header{
+  display:block;
+}
+.n_back{
+  background: url(../images/mountain-bw.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-align: center;
+  margin: 0px;
+  padding-top: 5px;
+}
+.n_menuList{
+  margin: 10% auto 19%;
+  text-align: center;
+  border-radius: 3px;
+  border: solid white 2px;
+  height: 400px;
+  width: 50%;
+  padding-top: 0px;
+  position: relative;
+  background-image: url(../images/mountain.jpg);
+  background-position-y: 1085px;
+  background-position-x: -300px;
+}
+#b_start{
+  height: 20px;
+  display: inline-block;
+  width: 120px;
+  font-size: 18px;
+  color: white;
+  background-color: #480000;
+  padding: 10px;
+  margin-top: 13%;
+  border-radius: 4px;
+  text-decoration: none;
+  -webkit-transition: background 0.2s linear;
+  -moz-transition: background 0.2s linear;
+}
+#b_start:hover{
+  cursor: pointer;
+  padding:9px;
+  color: #480000;
+  background-color: transparent;
+  border:solid #480000 1px;
+}
+#startPlan{
+  text-align: center;
+  margin: -5% 0% 10% -8%;
+  height: 60px;
+  width: 200px;
+  background-color: grey;
+  display: inline-block;
+  border-radius: 2px;
+  border: solid black 1px;
+  position: absolute;
+}
+#startPlan p{
+  text-decoration: none;
+}
+.n_navbar{
+  background-color: #D8D8D8;
+  width: 100%;
+  height: 270px;
+  border: solid black 1px;
+  padding-bottom: 1%;
+  margin-bottom: 200px;
+}
+.titleMap{
+  font-size: 10px;
+}
+.main_title{
+  margin-top: -60px;
+}
+.main_title h2{
+  margin: 80px 0px 0px 5px;
+  font-size: 40px;
+  color: #480000;
+}
+.main_title h1{
+  margin:0px;
+  font-size: 90px;
+  color: #480000  ;
+}
+
+.pac-container{
+  width:300px! important;
+  text-align: left!important;
+  margin:0!important;
+  padding:0!important;
+}
+.pac-matched{
+  box-shadow: none!important;
+  margin:0px!important;
+  padding:0px!important;
+  font-size: 14px;
+}
+.pac-item{
+  height: 28px;
+  direction: ltr!important;
+}
+.pac-item-query{
+
+  margin:0px 3px 0px 3px !important;
+  padding:0px!important;
+  box-shadow: none!important;
+  font-size: 13px;
+}
+.pac-item:hover{
+  background-color: #E8E8E8 !important;
+  cursor: pointer;
+}
+.pac-container:after {
+  background-image: none !important;
+  display: none;
+}
+.pac-icon{
+  display: none;
+}
+.back{
+  background:url(../images/paris.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-align: center;
+  margin: 0px;
+  padding-top: 5px;
+}.navTitle{
+   display: block;
+   position:fixed;
+   width: 100%;
+   margin:0px;
+   padding:0px;
+   background-color: #222;
+   text-align: center;
+   z-index: 2;
+ }
+.navTitle ul{
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+.navTitle ul li{
+  text-align: center;
+  text-decoration: none;
+  list-style-type:none;
+  font-size:25px;
+  font-weight: bold;
+  color:white;
+  -webkit-transition: background 0.3s linear;
+  -moz-transition: background 0.3s linear;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+.navTitle ul li:hover{
+  background-color: #A8A8A8;
+  color:black;
+  font-weight: bold;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+.navTitle ul li a, visited{
+  color: #ccc;
+  display: block;
+}
+#first_div{
+  display: inline-block;
+  float:left;
+  height:450px;
+  width: 200px;
+  z-index: 2;
+
+}
+.p_about{
+  background-color: gray;
+  display: inline-block;
+  margin-top: 120px;
+  padding: 10px;
+  height: 400px;
+  width: 600px;
+  border: solid black 1px;
+}
+.t_about{
+  text-decoration: none;
+  font-size: 16px;
+  text-align: left;
+  font-weight: normal;
+}
+#attention{
+  float: left;
+  height: 60px;
+  width: 270px;
+  text-align: center;
+  z-index: 2;
+  position: absolute;
+  background: url(../images/point-left.png) no-repeat 7px 27px;
+}#b_att{
+   margin-top: 55px;
+ }
+#wrapAttention{
+  display: none;
+  background-color: white;
+  height: 90px;
+  width: 270px;
+  margin-top: 175px;
+  margin-left: -810px;
+  font-size: 10px;
+  position: absolute;
+  border-radius: 8px;
+  z-index: 3;
+  border: solid red 2px;
+}
+#attention h1{
+  text-decoration: none;
+  margin-left: 80px;
+  text-align: left;
+  margin-top: 3px;
+}
+.listPic{
+  height: 100px;
+  width: 170px;
+  margin:0px 15px 0px 15px;
+  background-image: url(../images/packing.jpg);
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  text-align: center;
+  border:solid black 1px;
+  border-radius: 5px;
+}
+.navigateTo a{
+  text-decoration: none;
+  background-color: #999;
+  border-radius: 3px;
+  padding:5px;
+  margin:20px;
+  margin-top: 15px;
+  color:black;
+  border: solid black 1px;
+  -webkit-transition: background 0.2s linear;
+  -moz-transition: background 0.2s linear;
+}
+.navigateTo a:hover{
+  background-color: #C80000;
+  color: white;
+}
+.b_general{
+  text-decoration: none;
+  background-color: #D0D0D0;
+  border-radius: 3px;
+  padding:5px;
+  margin:10px;
+  margin-top: 15px;
+  color:black;
+  border: solid black 1px;
+  -webkit-transition: background 0.2s linear;
+  -moz-transition: background 0.2s linear;
+  font-weight: bold;
+}
+.b_general:hover{
+  background-color: #C80000;
+  color: white;
+  cursor: pointer;
+}
+
+.b_show{
+  background-color: #999;
+  border-radius: 3px;
+  padding:5px;
+  margin:20px;
+  margin-top: 15px;
+  color:black;
+  border: solid black 1px;
+  transition: background 0.2s linear;
+}
+.b_show:hover{
+  background-color: #C80000;
+  color: white;
+}
+.mapPic{
+  border:solid black 1px;
+  border-radius: 5px;
+  height: 100px;
+  width: 170px;
+  margin:15px;
+  background-image: url(../images/map.jpg);
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  text-align: center;
+}
+.navigateTo p{
+  text-decoration:none;
+  text-align: left;
+  font-size: 15px;
+  margin:15px 15px 15px 15px;
+}
+.navigateTo{
+  padding: 28px;
+  margin: 1% 4%;
+  height: 200px;
+  width: 200px;
+  float: left;
+  text-align: center center;
+  background-color: #D0D0D0;
+  border: solid black 2px;
+  border-radius: 2px;
+}
+.menuList{
+  margin:120px auto;
+  text-align: center;
+  border-radius: 3px;
+  border: solid black 1px;
+  height: 250px;
+  width: 100%;
+  padding-top: 0px;
+  background-color: #A8A8A8;
+  position: relative;
+}
+#makingList{
+  position: relative;
+  margin-left: 25%;
+}
+#makingSites{
+  position: relative;
+
+}
+#txtexample{
+  position: absolute;
+  margin-top: 212px;
+  width: 30%;
+  margin-left: 145px;
+  font-size: 13px;
+  z-index: 1;
+  display: inline-block;
+}
+#b_makeList
+{
+  text-decoration: none;
+  background-color: #D0D0D0;
+  border-radius: 3px;
+  padding:5px;
+  margin-left: -220px;
+  margin-top: 35px;
+  color:black;
+  border: solid black 1px;
+  transition: background 0.2s linear;
+  font-weight: bold;
+  position: absolute;
+}
+#b_makeSite
+{
+  text-decoration: none;
+  background-color: #D0D0D0;
+  border-radius: 3px;
+  padding:5px;
+  margin-left: -220px;
+  margin-top: 35px;
+  color:black;
+  border: solid black 1px;
+  transition: background 0.2s linear;
+  font-weight: bold;
+  position: absolute;
+}
+#b_makeList:hover{
+
+}
+.t_addSite{
+  text-decoration: underline;
+  text-align: left;
+  font-size: 20px;
+  margin:5px 1px 1px 10px;
+  display: inline-block;
+}
+.mapForm{
+  padding:0px;
+  width: 200px;
+  height: 450px;
+  float: left;
+  background-color: #A8A8A8;
+  text-align: left;
+  border: solid black 2px;
+  border-radius: 2px;
+  position: relative;
+  z-index: 1;
+}
+.mapForm h1{
+  text-decoration: underline;
+  text-align: left;
+  font-size: 20px;
+  margin:5px 1px 1px 10px;
+}
+.mapForm div{
+  display: block;
+}
+.mapForm div h1{
+  text-align: center;
+
+}
+#t_list{
+  margin-bottom: 335px;
+}
+.mapForm ul{
+  display: inline-block;
+  padding: 10px;
+}
+.erase{
+  background: url(../images/trash.png) no-repeat center;
+  width: 21px;
+  padding: 2px;
+  margin: 1px 4px;
+}
+.erase:hover{
+  cursor: pointer;
+
+}
+.mapForm ul li{
+  margin: 0px;
+  width: 150px;
+  list-style-type: none;
+  font-size: 20px;
+  padding: 0px;
+  background: url(../images/site-icon.png) no-repeat 5px 5px;
+
+}
+.mapForm ul li:hover{
+  cursor: pointer;
+  background-color: #B8B8B8;
+
+}
+#theMap{
+  float:left;
+  z-index: -1;
+  border:solid black 2px;
+  width: 600px;
+  height: 450px;
+  text-align: center;
+}
+.mapWrap{
+  margin:150px auto;
+  display: inline-block;
+  filter:alpha(opacity=50);
+  -moz-opacity:0.5;
+  -webkit-opacity:0.5;
+  opacity: 1;
+  z-index:1;
+  position: relative;
+}
+.wrap{
+  -webkit-filter: blur(1px);
+  -moz-filter: blur(1px);
+  display: inline;
+  text-align: center;
+  filter:alpha(opacity=50);
+  position: relative;
+  z-index: -3;
+}
+#totalItems{
+  margin:7px;
+  text-decoration: none;
+  font-size: 15px;
+  display: inline-block;
+}
+@-webkit-keyframes bounce {
+
+  from{ top:5px; }
+  to{ top: 40px; }
+}
+@-moz-keyframes bounce {
+
+  from{ top:5px; }
+  to{ top: 40px; }
+}
+.instructions{
+  z-index: 2;
+  border-radius: 5px;
+  height: 150px;
+  width: 200px;
+  display: inline-block;
+  position: absolute;
+  margin-right: 400px;
+  margin-top: 245px;
+  margin-left: -415px;
+  background-color: white;
+  text-decoration: none;
+  border: solid red 2px;
+  -webkit-animation-name:bounce;
+  -webkit-animation-duration: 0.5s;
+  -webkit-animation-iteration-count:2;
+  -webkit-animation-direction:alternate;
+  -moz-animation-name:bounce;
+  -moz-animation-duration: 0.5s;
+  -moz-animation-iteration-count:2;
+  -moz-animation-direction:alternate;
+
+}
+.sub_ul{
+  padding:0px;
+
+}
+.sub_li{
+  padding-left: 0px!important;
+  margin-left: 25px!important;
+  background: none!important;
+  list-style-type: none!important;
+}
+#inst{
+  padding: 5px;
+}
+.txtInput{
+  margin: 2px 10px;
+  width: 85%;
+}
+.showCost{
+  bottom: 0px;
+  position: absolute;
+  width: 200px;
+  text-align: center;
+  height: 30px;
+}
+#totalCost{
+  font-size: 20px;
+  text-decoration: none;
+  margin: 0px;
+
+}
+.b_inst{
+  display: inline-block;
+  border-radius: 5px;
+  padding:3px 10px 3px 10px;
+  text-align: center;
+  margin: 8px;
+  transition: background 0.2s linear;
+}
+.b_inst:hover{
+  background-color: #C80000;
+  color: white;
+  cursor: pointer;
+
+}
+#inst1{
+  padding:2px;
+  margin: 2px;
+  margin-top: 0px;
+}
+.container{
+  margin:120px auto;
+  display: inline-block;
+  min-height: 400px;
+  width:500px;
+  background-color: #989898;
+  -webkit-box-shadow: 2px 5px 5px #808080;
+  -moz-box-shadow: 2px 5px 5px #808080;
+  border-radius: 5px;
+  border:solid black 1px;
+  position: relative;
+  z-index:-3;
+
+}
+p{
+  text-decoration: underline;
+  font-family: Impact, sans-serif;
+  font-size: 20px;
+}
+.addTags{
+  float:left;
+}
+#theList{
+  list-style-type: none;
+}
+#form1{
+  padding:10px;
+}
+.nav{
+  margin: 0 auto;
+  display: inline-block;
+  text-align: center;
+}
+.wrapTitle{
+  text-align: center;
+}
+.title{
+  border: solid black 2px;
+  text-align: center;
+  height:40px;
+  padding:40px;
+  margin:0 auto;
+}
+
+.wrapper{
+  display: block;
+  margin:0 auto;
+  height: 30px;
+  text-align: center;
+}
+.b_tag{
+  background: url(../images/item.png) no-repeat 5px;
+  padding-left: 30px;
+  font-size: 16px;
+  margin:10px;
+  border:solid black 1px;
+  background-color: #C8C8C8;
+
+
+}
+.txtInput
+{
+  border:solid black 1px;
+  padding: 0.8%;
+}
+.txtAddItems{
+  width: 30%;
+  border: solid black 1px;
+  padding: 0.8%;
+}
+.b_tag:hover{
+  cursor: pointer;
+  background-color: #E80000 !important;
+  color: white;
+  border: solid black 1px;
+  background: url(../images/trash3.png) no-repeat 5px;
+}
+li{
+  margin:10px;
+  padding: 5px 20px 5px 20px;
+  border-radius: 3px;
+  text-align: center;
+  float:left;
+}
+footer{
+  bottom: 0px;
+  margin-bottom: 3px;
+  clear: both;
+  height: 30px;
+}
+.bottom{
+  bottom: 0px;
+  height: 15px;
+  border:solid white 4px;
+  text-align: center;
+}
+.ltd{
+  position: absolute;
+  padding: 0px 6px 0px 6px;
+  border-radius: 4px;
+  background-color: #B0B0B0;
+  display: inline-block;
+  -webkit-box-shadow: 2px 5px 5px;
+  -moz-box-shadow: 2px 5px 5px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 12px;
+  margin: 5px auto;
+}
