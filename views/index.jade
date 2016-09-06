@@ -40,13 +40,6 @@ html
                 #t_list
                     h1 List of sites:
                     ul#siteList
-                        | {{# each items }}
-                        article.item
-                            div name: {{ this.name }}
-                            div address: {{ this.address }}
-                            div cost: {{ this.cost }}
-                            div
-                         |        {{/each}}
 
                 .showCost
                     p#totalCost Total Cost = 0 $

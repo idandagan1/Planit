@@ -442,7 +442,6 @@ nav, section, article, header{
 }
 #theMap{
   float:left;
-  z-index: -1;
   border:solid black 2px;
   width: 600px;
   height: 450px;
@@ -452,20 +451,13 @@ nav, section, article, header{
   margin:150px auto;
   display: inline-block;
   filter:alpha(opacity=50);
-  -moz-opacity:0.5;
-  -webkit-opacity:0.5;
-  opacity: 1;
-  z-index:1;
   position: relative;
 }
 .wrap{
-  -webkit-filter: blur(1px);
-  -moz-filter: blur(1px);
   display: inline;
   text-align: center;
   filter:alpha(opacity=50);
   position: relative;
-  z-index: -3;
 }
 #totalItems{
   margin:7px;
@@ -566,7 +558,6 @@ nav, section, article, header{
   border-radius: 5px;
   border:solid black 1px;
   position: relative;
-  z-index:-3;
 
 }
 p{

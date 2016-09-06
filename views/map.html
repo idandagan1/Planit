@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sites</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href='/stylesheets/style.css'>
+    <script src="include/jquery-1.12.3.js"></script>
+
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfBlIs8yLBRGx02eU3kPgZPAW5sKY31kI&libraries=places"></script>
+</head>
+<body class="back">
+<header class="navTitle">
+    <section>
+        <ul>
+            <a href="index.html"><li>Home</li></a>
+            <a href="list.html"><li>List</li></a>
+            <a href="map.html"><li>Sites</li></a>
+        </ul>
+    </section>
+</header>
+<section class="mapWrap" id="wrapMain">
+    <div class="mapForm" >
+        <form action="/insert" autocomplete="on" method="post" id="formFromUser">
+            <h1 class="t_addSite"><label>Site Name</label></h1><a style="color:red">*</a>
+            <input id="SiteName" type="text" class="txtInput" name='name' placeholder="Best shopping center" value="">
+            <h1 class="t_addSite"><label>Address</label></h1><a style="color:red">*</a>
+            <input type="text" id="pac-input" class="txtInput" name='address' placeholder="5 Nordau Avenue" value="">
+            <label id="lblresult"></label>
+
+            <h1 class="t_addSite"><label>Estimated Costs</label></h1>
+            <input type="number" id="cost" class="txtInput" name='cost' placeholder="150$ (optional)" value="">
+            <br>
+            <input id="b_addSite" type="submit" class="b_general" value="Add to list">
+            <input id="b_clearSite" type="button" class="b_general" value="Clear list">
+        </form>
+    </div>
+    <div id="theMap">
+    </div>
+    <section class="mapForm">
+        <div id="t_list">
+            <h1>List of sites:</h1>
+            <ul id="siteList">
+            </ul>
+        </div>
+        <div class="showCost">
+            <p id="totalCost">Total Cost = 0 $</p>
+        </div>
+    </section>
+</section>
+<div id="wrapAttention">
+    <div id="attention">
+        <h1>You must enter 'Site Name' and 'Address'!</h1>
+    </div>
+    <input type="button" id="b_att" class="b_general" value="Got it!" onclick="showMap()">
+</div>
+</body>
+<script src="include/JS.js"></script>
+</html>
