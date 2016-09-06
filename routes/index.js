@@ -11,16 +11,6 @@ router.get('/', function(req, res, next) {
   res.render('map');
 });
 
-router.get('/list', function(req, res, next) {
-
-  res.render('list');
-  res.redirect('/');
-});
-router.get('/index', function(req, res, next) {
-
-  res.redirect('/index');
-});
-
 router.get('/get-data', function(req,res,next){
 
   mongo.connect(url,function(err,db){
@@ -51,18 +41,11 @@ router.post('/insert', function(req,res,next){
     db.collection('user-data').insertOne(item,function(err,result){
       assert.equal(null,err);
       console.log("Item has been insert! You are the best!!");
-      onAddItem(item);
       db.close();
     })
   })
 
   res.redirect('/');
 })
-
-function onAddItem(newItem){
-  var a=9;
-
-};
-
 
 module.exports = router;
