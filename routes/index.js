@@ -1,8 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var mongo = require('mongodb').MongoClient;
 var assert = require('assert');
-var url = 'mongodb://localhost:27017/local';
+var mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
+mongoose.createConnection('localhost:27017/local');
+var Schema = mongoose.Schema;
 
 /* home page. */
 router.get('/', function(req, res, next) {
@@ -17,75 +19,51 @@ router.get('/map', function(req, res, next) {
   res.render('map');
 });
 
+var userSchema = new Schema({
+  UserName: {type: String, required: true},
+  Password: {type: String, required: true}
+}, {collection: 'user-data'});
 
+var UserData = mongoose.model('user-data', userSchema);
+
+/* Register Method */
 router.post('/register', function(req,res,next) {
   var user = {
-    userName: req.body.userName,
-    password: req.body.password
+    UserName: req.body.userName,
+    Password: req.body.password
   };
 
-  currentUser = user.userName;
+  currentUser = user.UserName;
 
-  mongo.connect(url, function (err, db) {
-    assert.equal(null, err);
-    var collect = db.collection('users');
-    db.collection('users', function(err, collection) {
-      if (!err) {
-        collection.find().toArray(function (err, docs) {
-          if (!err) {
-            db.close();
-            var intCount = docs.length;
-            if (intCount > 0) {
-              var strJson = "";
-              for (var i = 0; i < intCount;) {
-                strJson += '{"userName":"' + docs[i].userName + '"}'
-                i++;
-                if (i < intCount) {
-                  strJson += ',';
-                }
-              }
-            }
-          } else {
-            console.log('empty');
-          }
-        }); //end collection.find
-      }
-    })
+  UserData.count({"UserName":currentUser})
+      .then(function(count) {
+        if(count == 0){
+          var data = new UserData(user);
+          data.save();
+          console.log("New user has been insert!");
+        }else{
+          console.log("UserName already exist.");
+        }
+      });
 
-    /*
-    var res = db.collection('users').find({"userName":currentUser}).toArray(function(err,docs){
-      var count = docs.length;
-    });*/
-    db.close();
-    });
     res.redirect('/');
 });
 
 
 function addNewUser(user,doc){
 
-  doc.forEach(function(name){
-    console.log(name);
-  })
-  mongo.connect(url, function (err, db) {
-    assert.equal(null, err);
-    db.collection('users').insertOne({"userName":user.userName, "password":user.password}, function (err, result) {
-      assert.equal(null, err);
-      console.log("user has been insert! You are the best!!");
-      db.close();
-    })
-  });
-
 };
-
+/* Sign-In Method */
 router.post('/signIn',function(req,res,next) {
+  var user = {
+    UserName: req.body.userName,
+    Password: req.body.password
+  };
+  var data = new UserData(user);
+  data.save();
+  console.log("New user has been insert!");
 
-  Ext.create('Ext.window.Window', {
-    title: 'Sign In',
-    height: 200,
-    width: 400,
-    layout: 'fit'
-  }).show();
+  res.redirect('/');
 
 });
 

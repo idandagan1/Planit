@@ -3,10 +3,11 @@
  */
 var express = require('express');
 var router = express.Router();
-var mongo = require('mongodb').MongoClient;
 var assert = require('assert');
 var resultArray = [];
-var url = 'mongodb://localhost:27017/local';
+var mongoose = require('mongoose');
+mongoose.createConnection('localhost:27017/local');
+var Schema = mongoose.Schema;
 
 /* map page. */
 router.get('/map', function(req, res, next) {
@@ -20,6 +21,15 @@ router.get('/list', function(req, res, next) {
 router.get('/index', function(req, res, next) {
     res.render('index');
 });
+
+var siteSchema = new Schema({
+    name: {type: String, required: true},
+    address: {type: String, required: true},
+    cost: Number
+}, {collection: 'site-data'});
+
+
+var siteData = mongoose.model('site-data', siteSchema);
 
 router.get('/get-data', function(req,res,next){
 
