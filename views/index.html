@@ -4,41 +4,41 @@
     <title>Plan It</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" href='/stylesheets/style.css'>
+    <link rel="stylesheet" href="stylesheets/style.css">
 </head>
 <body class="n_back">
 <section class="navTitle">
     <ul>
-        <a href="../views/index.html"><li>Home</li></a>
+        <a href="/"><li>Home</li></a>
         <a href="/list"><li>List</li></a>
-        <a href="../views/map.html"><li>Sites</li></a>
+        <a href="/map"><li>Sites</li></a>
     </ul>
 </section>
 <section class="n_menuList">
-    <section class="main_title">
+    <form class="main_title">
         <h2>going for a trip?</h2>
         <h1>Plan It!</h1>
-        <a href="#startPlan" id="b_start">Start Planning</a>
-    </section>
+        <input type="button" id="b_start">Start Planning</input>
+    </form>
 </section>
 <section class="n_navbar">
     <div id="startPlan">
         <p>Start Planing</p>
     </div>
-    <section id="makingList" class="navigateTo">
-        <a href="list.html">Make a list</a>
-        <p>Make your list of items that you want to pack for the trip.</p>
-        <div class="listPic">
-        </div>
-    </section>
-    <section id="makingSites" class="navigateTo">
-        <a href="map.html" >Mark your sites</a>
-        <p>Mark all the sites that you are planning to visit.</p>
-        <div class="mapPic" href="map.html">
-        </div>
-    </section>
+    <form id="signIn" action="/signIn" method="post" class="navigateTo">
+        name: <input type="text" class="txtInput" name="userName">
+        password: <input type="password" class="txtInput" name="password">
+        <input id="b_signIn" type="button" onclick="doit()" class="b_general" value="Sign In">
+        <div class="listPic"></div>
+    </form>
+    <form id="register" action="/register" method="post" class="navigateTo">
+        name: <input type="text" class="txtInput" name="userName">
+        password: <input type="password" class="txtInput" name="password">
+        <input id="b_register" type="submit" class="b_general" value="Register">
+        <div class="mapPic" href="map.html"></div>
+    </form>
 </section>
 </body>
-<script src="include/jquery-1.12.3.js"></script>
-<script src="include/JS.js"></script>
+<--script src="public/javascripts/jquery.js"><--/script>
+<--script src="public/javascripts/JS.js"><--/script>
 </html>

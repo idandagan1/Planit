@@ -8,9 +8,14 @@ var bodyParser = require('body-parser');
 var mongo = require('mongodb');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var map = require('./routes/map');
+var list = require('./routes/list');
+var jquery = require('./public/javascripts/Jquery');
+//var js = require('./public/javascripts/JS');
+
 
 var app = express();
+app.locals.currentUser == "";
 
 // view engine setup
 //app.set('port', process.env.PORT || 3000);
@@ -26,8 +31,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 app.use('/', routes);
-app.use('/users', users);
+app.use('/map', map);
+app.use('/list', list);
+app.use(jquery);
+//app.use(js);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -35,6 +45,7 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
+
 
 // error handlers
 
