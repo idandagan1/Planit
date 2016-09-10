@@ -6,21 +6,6 @@ mongoose.Promise = global.Promise;
 mongoose.createConnection('localhost:27017/local');
 var Schema = mongoose.Schema;
 
-/* home page.
-router.get('/', function(req, res, next) {
-  //res.render('/index');
-  //res.render('index');
-});
-
-router.get('/list', function(req, res, next) {
-  //res.render('list');
-  //res.render('list');
-});
-
-router.get('/map', function(req, res, next) {
-  //res.end('/map');
-  //res.render('map');
-});*/
 
 var userSchema = new Schema({
   UserName: {type: String, required: true},
@@ -70,23 +55,27 @@ function isPasswordValid(first, second){
 
 /* Sign-In Method */
 router.post('/signIn',function(req,res,next) {
-  var success = false;
+
   var user = {
     UserName: req.body.userName,
-    Password: req.body.password,
-    Email: req.body.email
+    Password: req.body.password
   };
   UserData.findOne({UserName:user.UserName, Password: user.Password}, function(err,obj){
 
     if(obj !== null){
       console.log("User is in the DB!")
       currentUser = user.UserName;
-      res.sendfile('./public/list.html');
+      res.redirect('/');
     }else{
       console.log("User Doesn't exist");
     }
   })
 
 });
+
+router.post('/test',function(req,res,next) {
+
+  console.log("testing");
+})
 
 module.exports = router;

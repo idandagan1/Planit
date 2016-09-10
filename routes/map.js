@@ -38,7 +38,7 @@ router.get('/get-data', function(req, res, next) {
         });
 });
 
-router.post('/insert', function(req,res,next){
+router.post('/addSite', function(req,res,next){
     var item = {
         name: req.body.name,
         address: req.body.address,

@@ -8,21 +8,6 @@ var mongoose = require('mongoose');
 mongoose.createConnection('localhost:27017/local');
 var Schema = mongoose.Schema;
 
-/* list page.
-router.get('/list', function(req, res, next) {
-    res.redirect('/list');
-});
-
-router.get('/index', function(req, res, next) {
-    res.redirect('/index');
-    //res.render('index');
-});
-
-router.get('/map', function(req, res, next) {
-    res.redirect('/map');
-    //res.render('map');
-});*/
-
 var listSchema = new Schema({
     Name: {type: String, required: true},
     Quantity: Number
@@ -37,8 +22,10 @@ router.post('/insert', function(req,res,next) {
         Name: req.body.item
     }
 
+})
+router.post('/addItem', function(req,res,next){
 
-
+    console.log('inserted item');
 })
 
 module.exports = router;
