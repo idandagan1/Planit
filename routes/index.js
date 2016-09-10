@@ -49,8 +49,7 @@ router.post('/register', function(req,res,next) {
               var data = new UserData(user);
               data.save();
               console.log("New user has been insert!");
-              //res.render('list');
-              res.redirect('/list');
+              res.sendfile('./public/list.html');
             } else {
               console.log("User name already exist.");
             }
@@ -79,14 +78,12 @@ router.post('/signIn',function(req,res,next) {
   };
   UserData.findOne({UserName:user.UserName, Password: user.Password}, function(err,obj){
 
-    if(obj != null){
+    if(obj !== null){
       console.log("User is in the DB!")
       currentUser = user.UserName;
-      res.redirect('/list');
+      res.sendfile('./public/list.html');
     }else{
       console.log("User Doesn't exist");
-      //req.flash('info', "Exist!");
-      res.redirect('/');
     }
   })
 
