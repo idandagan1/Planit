@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session')
 
 var mongoose = require('mongoose');
 mongoose.connect('localhost:27017/local');
@@ -13,11 +14,12 @@ var routes = require('./routes/index');
 var map = require('./routes/map');
 var list = require('./routes/list');
 var jquery = require('./public/javascripts/Jquery');
-//var js = require('./public/javascripts/JS');
+var js = require('./public/javascripts/newJs');
 
 
 var app = express();
 app.locals.currentUser == "";
+app.locals.validator = require('validator');
 
 // view engine setup
 //app.set('port', process.env.PORT || 3000);
@@ -40,6 +42,19 @@ app.use('/list', list);
 app.use(jquery);
 //app.use(js);
 
+app.use(function(req, res, next){
+  res.locals.success_messages = req.flash('success_messages');
+  res.locals.error_messages = req.flash('error_messages');
+  next();
+});
+app.use(session({secret: 'codingdefined', resave: false, saveUninitialized: true}));
+app.use(require('flash')());
+
+app.use(function (req, res) {
+  // flash a message
+  req.flash('info', 'hello!');
+  next();
+})
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -18,12 +18,11 @@
     <section class="container" id="navbar">
         <p>Make your list of things to pack</p>
         <!--Making the list-->
-        <form id="form1">
-
+        <form id="form1" action="/insert" method="post">
             <p id="totalItems">Total Items: 0</p>
-            <input type="text" id="item" class="txtAddItems" placeholder="Add your item here..." value="" autocomplete="on">
+            <input type="text" id="item" class="txtAddItems" placeholder="Add your item here..." name="item" value="" autocomplete="on">
             <input type="button" id="addItem" action='/insert' method='post' class="b_general" value="Add Item">
-            <input type="button" id="b_clearList" class="b_general" id="res" value="Clear List">
+            <input type="submit" id="b_clearList" class="b_general" id="res" value="Clear List">
         </form>
         <section class="wrapper">
             <nav class="nav">

@@ -22,11 +22,21 @@ router.get('/map', function(req, res, next) {
 });
 
 var listSchema = new Schema({
-    name: {type: String, required: true},
-    quantity: Number
+    Name: {type: String, required: true},
+    Quantity: Number
 }, {collection: 'list-data'});
 
-
 var listData = mongoose.model('list-data', listSchema);
+
+/* Register Method */
+router.post('/insert', function(req,res,next) {
+
+    var item = {
+        Name: req.body.item
+    }
+
+
+
+})
 
 module.exports = router;
