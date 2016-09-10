@@ -6,26 +6,29 @@ var router = express.Router();
 var assert = require('assert');
 var mongoose = require('mongoose');
 mongoose.createConnection('localhost:27017/local');
-var Schema = mongoose.Schema;
 
-var listSchema = new Schema({
-    Name: {type: String, required: true},
-    Quantity: Number
-}, {collection: 'list-data'});
+var Item = require('../models/Items');
+var Users = require('../models/Users');
 
-var listData = mongoose.model('list-data', listSchema);
-
-/* Register Method */
-router.post('/insert', function(req,res,next) {
-
+router.post('/addItem', function(req,res,next) {
     var item = {
         Name: req.body.item
+    };
+    if(currentUser != null) {
+        Users.findOne({UserName: currentUser}, function (err, obj) {
+
+            if (obj !== null) {
+                var newItem = new Item(item);
+                obj.Items.push(newItem);
+                console.log("Item has been insert to User");
+            }
+        })
+    }else{
+        console.log("User is not logged in");
     }
 
-})
-router.post('/addItem', function(req,res,next){
 
-    console.log('inserted item');
+    res.redirect('/');
 })
 
 module.exports = router;

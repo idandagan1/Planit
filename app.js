@@ -10,7 +10,7 @@ var mongoose = require('mongoose');
 mongoose.connect('localhost:27017/local');
 var Schema = mongoose.Schema;
 var app = express();
-var port = process.env.PORT || 3333;
+var port = process.env.PORT || 3000;
 
 console.log("Server listening on port " + port);
 
@@ -18,7 +18,7 @@ var routes = require('./routes/index');
 var map = require('./routes/map');
 var list = require('./routes/list');
 
-app.locals.currentUser == "";
+app.locals.currentUser = null;
 app.locals.validator = require('validator');
 
 app.use(logger('dev'));

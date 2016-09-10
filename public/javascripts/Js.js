@@ -46,20 +46,63 @@ $(document).ready(function(){
 
     $('#b_signIn').click(function(data){
 
-        var data = $('#signIn').serialize();
-        $.post('http://localhost:3333/signIn', data);
+        var userInfo = $('#signIn').serialize();
+        $.ajax({
+            url: '/signIn',
+            method: 'post',
+            data: userInfo,
+            success: function (obj) {
+                alert("Sign in Success!");
+            }
+        });
+
     })
 
     $('#b_register').click(function(data){
 
-        var data = $('#register').serialize();
-        $.post('http://localhost:3333/register', data);
+        var userInfo = $('#register').serialize();
+        $.ajax({
+            url: '/register',
+            method: 'post',
+            data: userInfo,
+            success: function (obj) {
+                alert("Register Success!");
+            }
+        });
+
+    })
+
+    $('#b_addSite').click(function(data){
+
+        var userInfo = $('#formSite').serialize();
+        $.ajax({
+            url: '/map.html/addSite',
+            method: 'post',
+            data: userInfo,
+            success: function (obj) {
+                alert("Site has been Added!");
+                addSite(userInfo);
+            }
+        });
+
     })
 
     $("#addItem").click(function(){
 
-        var data = $('#item').serialize();
-        $.post('http://localhost:3333/list.html/addItem', data);
+
+        var item = $('#item').serialize();
+        $.ajax({
+            url: '/list.html/addItem',
+            method: 'post',
+            data: item,
+            success: function (obj) {
+                console.log("item has been insert");
+            }
+        });
+
+
+        //var data = $('#item').serialize();
+        //$.post('/list.html/addItem', data);
 
         var name = document.getElementById("item").value;
         if(name != "")
@@ -146,11 +189,6 @@ function showMap(){
     $(".mapWrap").css({"z-index":"1"},100);
 }
 
-$("#b_addSite").click(function(){
-
-    addSite(this);
-
-})
 function addSite(event)//Adding the site to the list.
 {
 
@@ -308,12 +346,12 @@ google.maps.event.addDomListener(window, 'load', initialize);
 window.onload = function(){
     initialize();
 }
-
+/*
 added.addEventListener("submit", function() {
     var newlatlong = new google.maps.LatLng(place.geometry.location.lat(),place.geometry.location.lng());
     map.setCenter(newlatlong);
     marker.setPosition(newlatlong);
     map.setZoom(12);
 
-});
+});*/
 

@@ -20,15 +20,14 @@
 </header>
 <section class="mapWrap" id="wrapMain">
     <div class="mapForm" >
-        <form action="/map.html/insert" autocomplete="on" method="post" id="formSite">
+        <form  id="formSite">
             <h1 class="t_addSite"><label>Site Name</label></h1><a style="color:red">*</a>
-            <input id="SiteName" type="text" class="txtInput" name='name' placeholder="Best shopping center" value="">
+            <input type="text" id="SiteName" class="txtInput" name="sitename" placeholder="Best shopping center" required>
             <h1 class="t_addSite"><label>Address</label></h1><a style="color:red">*</a>
-            <input type="text" id="pac-input" class="txtInput" name='address' placeholder="5 Nordau Avenue" value="">
+            <input type="text" id="pac-input" class="txtInput" name="siteaddress" placeholder="5 Nordau Avenue" required>
             <label id="lblresult"></label>
-
             <h1 class="t_addSite"><label>Estimated Costs</label></h1>
-            <input type="number" id="cost" class="txtInput" name='cost' placeholder="150$ (optional)" value="">
+            <input type="number" id="cost" class="txtInput" name="sitecost" placeholder="150$">
             <br>
             <input id="b_addSite" type="button" class="b_general" value="Add to list">
             <input id="b_clearSite" type="button" class="b_general" value="Clear list">
