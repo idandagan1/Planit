@@ -9,7 +9,7 @@ var mongoose = require('mongoose');
 mongoose.createConnection('localhost:27017/local');
 var Schema = mongoose.Schema;
 
-/* map page. */
+/* map page.
 router.get('/map', function(req, res, next) {
     res.render('map');
 });
@@ -20,7 +20,7 @@ router.get('/list', function(req, res, next) {
 
 router.get('/index', function(req, res, next) {
     res.render('index');
-});
+});*/
 
 var siteSchema = new Schema({
     name: {type: String, required: true},

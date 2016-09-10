@@ -8,18 +8,20 @@ var mongoose = require('mongoose');
 mongoose.createConnection('localhost:27017/local');
 var Schema = mongoose.Schema;
 
-/* list page. */
+/* list page.
 router.get('/list', function(req, res, next) {
-    res.render('list');
+    res.redirect('/list');
 });
 
 router.get('/index', function(req, res, next) {
-    res.render('index');
+    res.redirect('/index');
+    //res.render('index');
 });
 
 router.get('/map', function(req, res, next) {
-    res.render('map');
-});
+    res.redirect('/map');
+    //res.render('map');
+});*/
 
 var listSchema = new Schema({
     Name: {type: String, required: true},

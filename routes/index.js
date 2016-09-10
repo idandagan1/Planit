@@ -6,18 +6,21 @@ mongoose.Promise = global.Promise;
 mongoose.createConnection('localhost:27017/local');
 var Schema = mongoose.Schema;
 
-/* home page. */
+/* home page.
 router.get('/', function(req, res, next) {
-  res.render('index');
+  //res.render('/index');
+  //res.render('index');
 });
 
 router.get('/list', function(req, res, next) {
-  res.render('list');
+  //res.render('list');
+  //res.render('list');
 });
 
 router.get('/map', function(req, res, next) {
-  res.render('map');
-});
+  //res.end('/map');
+  //res.render('map');
+});*/
 
 var userSchema = new Schema({
   UserName: {type: String, required: true},
