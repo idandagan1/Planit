@@ -25,13 +25,13 @@
     <div id="startPlan">
         <p>Start Planing</p>
     </div>
-    <form id="signIn" action="users/signIn" method="post" class="navigateTo">
+    <form id="signIn" action="/signIn" method="post" class="navigateTo">
         <a id="titleSignIn" class="signIn" >Sign In</a></br></br>
         <p>User Name:</p>
-        <input type="text" class="txtInput" name="userName" required>
+        <input type="text" id="_username" class="txtInput" name="userName" required>
         <p>Password:</p>
-        <input type="password" class="txtInput" name="password" required>
-        <input id="b_signIn" type="submit" class="b_general" value="Sign In">
+        <input type="password" id="_password" class="txtInput" name="password" required>
+        <input id="b_signIn" type="button" class="b_general" value="Sign In">
         <div class="listPic"></div>
     </form>
     <form id="register" action="/register" method="post" class="navigateTo">
@@ -44,11 +44,11 @@
         <input type="password" class="txtInput" name="ConfirmPassword" required>
         <p>Email:</p>
         <input type="email" class="txtInput" name="email" required>
-        <input id="b_register" type="submit" class="b_general" value="Register">
+        <input id="b_register" type="button" class="b_general" value="Register">
     </form>
 </section>
 </body>
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-<script src="javascripts/newjs.js"></script>
+<script src="javascripts/Js.js"></script>
 
 </html>
