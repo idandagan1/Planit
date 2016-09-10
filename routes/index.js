@@ -82,6 +82,7 @@ router.post('/signIn',function(req,res,next) {
       res.redirect('/list');
     }else{
       console.log("User Doesn't exist");
+      //req.flash('info', "Exist!");
       res.redirect('/');
     }
   })
