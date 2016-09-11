@@ -28,6 +28,16 @@ function setScroll(){
             $("#feedback").text(scroll_top);
         })
 
+
+        $('#titleSignIn').click(function(){
+            $('#signInForm').fadeIn(200);
+            $('#registerForm').fadeOut(200);
+        })
+
+        $('#titleRegister').click(function(){
+            $('#registerForm').fadeIn(200);
+            $('#signInForm').fadeOut(200);
+        })
     })
 
 }
@@ -44,15 +54,48 @@ var Item = function(name, quantity)
 $(document).ready(function(){
 
 
+    $(window).load(function() {
+        if (window.location.pathname == '/list.html') {
+
+            $.ajax({
+                url: '/list.html/getData',
+                method: 'get',
+                success: function (obj) {
+                    var list = obj.list;
+                    displayItems(list);
+                    if(numberOfItems === 0){
+                        document.getElementById("inst").style.display = "inline-block";
+                    }
+                }
+            });
+
+        }
+        else if (window.location.pathname == '/map.html') {
+
+            $.ajax({
+                url: '/map.html/getData',
+                method: 'get',
+                success: function (obj) {
+                    var list = obj.list;
+                    displaySites(list);
+                }
+            });
+
+        }
+
+    })
+
+
     $('#b_signIn').click(function(data){
 
-        var userInfo = $('#signIn').serialize();
+        var userInfo = $('#signInForm').serialize();
         $.ajax({
             url: '/signIn',
             method: 'post',
             data: userInfo,
             success: function (obj) {
-                alert("Sign in Success!");
+                window.location = '/list.html';
+                window.reload();
             }
         });
 
@@ -60,16 +103,16 @@ $(document).ready(function(){
 
     $('#b_register').click(function(data){
 
-        var userInfo = $('#register').serialize();
+        var userInfo = $('#registerForm').serialize();
         $.ajax({
             url: '/register',
             method: 'post',
             data: userInfo,
             success: function (obj) {
-                alert("Register Success!");
+                window.location = '/list.html';
+                window.reload();
             }
         });
-
     })
 
     $('#b_addSite').click(function(data){
@@ -80,7 +123,6 @@ $(document).ready(function(){
             method: 'post',
             data: userInfo,
             success: function (obj) {
-                alert("Site has been Added!");
                 addSite(userInfo);
             }
         });
@@ -100,10 +142,6 @@ $(document).ready(function(){
             }
         });
 
-
-        //var data = $('#item').serialize();
-        //$.post('/list.html/addItem', data);
-
         var name = document.getElementById("item").value;
         if(name != "")
         {
@@ -118,6 +156,35 @@ $(document).ready(function(){
 
         }
     })
+
+    function displayItems(list){
+
+        if(list == null){
+            return;
+        }
+
+        for (var i=0; i<list.length; i++)
+        {
+            $("#theList").append("<li id=item" + i + " class=b_tag onclick=deleted(this)>" + list[i].Name + "</li>");
+            document.getElementById("item"+i).value = "";
+            numberOfItems = list.length;
+            document.getElementById("totalItems").innerHTML = "Total Items: "+list.length;
+        }
+
+    }
+
+    function displaySites(list){
+
+        if(list == null){
+            return;
+        }
+
+        for (var i=0; i<list.length; i++)
+        {
+            $("#siteList").append("<li id="+i+" onclick=getSite(this) >"+list[i].SiteName+"</li><br>");
+        }
+
+    }
 
 //-------Clear List-------------------
     $("#b_clearList").click(function(){
@@ -210,21 +277,17 @@ function addSite(event)//Adding the site to the list.
             $("#totalCost").animate({'font-size':'20'},70);
         }
 
-        var new_site = new Site(new_nickname,new_location,new_cost);
-        listOfSites.push(new_site);
+        var newSite = new Site(new_nickname,new_location,new_cost);
+        listOfSites.push(newSite);
         document.getElementById("SiteName").value="";
         document.getElementById("pac-input").value="";
         document.getElementById("cost").value="";
-        displayTheSites(new_site);
+        $("#siteList").append("<li id="+index+" onclick=getSite(this) >"+newSite.SiteName+"</li><br>");
+        index++;
     }
 
 }
 //----------Display the Site.------------------
-function displayTheSites(event)
-{
-    $("#siteList").append("<li id="+index+" onclick=getSite(this) >"+event.SiteName+"</li><br>");
-    index++;
-}
 
 function getSite(event){
 

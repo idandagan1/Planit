@@ -27,7 +27,7 @@ router.post('/register', function(req,res,next) {
               var data = new Users(user);
               data.save();
               console.log("New user has been insert!");
-
+              res.end('{"success" : "Updated Successfully", "status" : 200}');
             } else {
               console.log("User name already exist.");
             }
@@ -56,8 +56,9 @@ router.post('/signIn',function(req,res,next) {
   Users.findOne({UserName:user.UserName, Password: user.Password}, function(err,obj){
 
     if(obj !== null){
-      console.log("User is in the DB!")
+      console.log("User logged in!")
       currentUser = user.UserName;
+      res.end('{"success" : "Updated Successfully", "status" : 200}');
     }else{
       console.log("User Doesn't exist");
     }

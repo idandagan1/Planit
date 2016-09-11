@@ -14,7 +14,7 @@ var Users = new Schema({
     UserName: {type: String, index:true, unique:true, required: true},
     Password: {type: String, required: true},
     Email: {type: String},
-    Items:[{ type: Schema.Types.ObjectId, ref: 'Item' }]
+    Items:[]
 }, {collection: 'Users'});
 
 module.exports = mongoose.model('Users', Users);

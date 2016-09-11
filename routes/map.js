@@ -7,8 +7,26 @@ var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 mongoose.createConnection('localhost:27017/local');
 var Schema = mongoose.Schema;
+var Sites = require('../models/Sites');
+var Visitors = require('../models/Visitors');
 
+router.get('/getData',function(req,res,next){
 
+    if(currentUser == null){
+        return;
+    }
+/*
+    Sites.find({visitor: currentUser})
+        .then(function(doc) {
+            var items = doc.Items;
+            var listOfItems = [];
+            items.forEach(function(item){
+                listOfItems.push(item);
+            })
+            res.send({list:listOfItems});
+
+        });*/
+})
 
 router.post('/addSite', function(req,res,next){
     var site = {
@@ -16,26 +34,27 @@ router.post('/addSite', function(req,res,next){
         address: req.body.siteaddress,
         cost: req.body.sitecost
     };
-    var data = new siteData(site);
-    data.save();
 
-    if(!isSiteValid(site)){
+    if(isSiteValid(site)){
+        if(currentUser==null){
+            return;
+        }
         var visitor = {
             name: currentUser,
             cost: site.cost
         };
-        var visitorToInsert = new newVisitor(visitor);
-        siteData.findOne({SiteName: site.name, Address: site.address}, function(err,obj) {
-        if(obj !== null) {
+        var newVisitor = new Visitors(visitor);
+        newVisitor.save();
+        Sites.findOne({SiteName: site.name, Address: site.address}, function(err,obj) {
+            if (obj !== null) {
 
-            obj.visitors.push(visitorToInsert);
-            siteData.save();
-            console.log('visitor has been added');
-        }else{
-            addSite(site);
-            //data.visitors.push(visitorToInsert);
-            console.log('site has been added');
-        }
+                obj.Visitors.push(newVisitor);
+                obj.save();
+                console.log('visitor has been added');
+            } else {
+                addSite(site, newVisitor);
+            }
+            res.end('{"success" : "Updated Successfully", "status" : 200}');
         });
     }
 
@@ -52,8 +71,10 @@ function isSiteValid(site)
 
 }
 
-function addSite(site){
-    var data = new siteData(site);
+function addSite(site,visitor){
+    var data = new Sites(site);
+    data.Visitors.push(visitor);
     data.save();
+    console.log("Site has been added");
 }
 module.exports = router;

@@ -10,6 +10,24 @@ mongoose.createConnection('localhost:27017/local');
 var Item = require('../models/Items');
 var Users = require('../models/Users');
 
+router.get('/getData',function(req,res,next){
+
+    if(currentUser == null){
+        return;
+    }
+
+    Users.findOne({UserName: currentUser})
+        .then(function(doc) {
+            var items = doc.Items;
+            var listOfItems = [];
+            items.forEach(function(item){
+                listOfItems.push(item);
+            })
+            res.send({list:listOfItems});
+
+        });
+})
+
 router.post('/addItem', function(req,res,next) {
     var item = {
         Name: req.body.item
@@ -20,6 +38,7 @@ router.post('/addItem', function(req,res,next) {
             if (obj !== null) {
                 var newItem = new Item(item);
                 obj.Items.push(newItem);
+                obj.save();
                 console.log("Item has been insert to User");
             }
         })

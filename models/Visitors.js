@@ -11,7 +11,7 @@ var Schema = mongoose.Schema;
 
 var Visitors = new Schema({
     Name: {type: String, index:true, required: true},
-    Cost: Number
+    Cost: {type: Number, required: false},
 }, {collection: 'Visitors'});
 
 module.exports = mongoose.model('Visitors', Visitors);

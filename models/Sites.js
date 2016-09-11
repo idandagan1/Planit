@@ -10,9 +10,10 @@ mongoose.createConnection('localhost:27017/local');
 var Schema = mongoose.Schema;
 
 var siteSchema = new Schema({
-    SiteName: {type: String, required: true},
-    Address: {type: String, required: true},
-    Cost: Number
+    SiteName: {type: String, index:true, required: true},
+    Address: {type: String, index:true, unique:true, required: true},
+    Cost: Number,
+    Visitors:[]
 }, {collection: 'Sites'});
 
 module.exports = mongoose.model('Sites', siteSchema);
