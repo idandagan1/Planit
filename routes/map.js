@@ -24,6 +24,18 @@ router.get('/getData',function(req,res,next){
     });
 
 })
+router.get('/getTop',function(req,res,next){
+
+    var topFive = [];
+    Site.find({},{SiteName:1, Visitors:1}).then(function(sites,err){
+        sites.sort(function(a, b){
+            return b.Visitors.length - a.Visitors.length});
+        for(var i=0; i<sites.length && i<5;i++){
+            topFive.push(sites[i].SiteName);
+        }
+        res.send({list: topFive});
+    })
+})
 
 router.post('/addSite', function(req,res,next){
 

@@ -244,7 +244,14 @@ nav, section, article, header{
 .signIn:hover{
   cursor: pointer;
 }
-
+.topFive{
+  height:100px;
+  text-align: center;
+  display: none;
+}
+.topFiveList{
+  text-align: center;
+}
 .navigateTo a:hover{
   background-color: #C80000;
   color: white;
@@ -420,7 +427,7 @@ display: none;
   margin-bottom: 335px;
 }
 .mapForm ul{
-  display: inline-block;
+
   padding: 10px;
 }
 .erase{
@@ -438,7 +445,7 @@ display: none;
   width: 150px;
   list-style-type: none;
   font-size: 20px;
-  padding: 0px;
+  padding-left: 33px;
   background: url(../images/site-icon.png) no-repeat 5px 5px;
 
 }

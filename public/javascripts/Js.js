@@ -85,6 +85,18 @@ $(document).ready(function(){
 
     })
 
+    $('#b_getTop').click(function(data){
+
+        $.ajax({
+            url: '/map.html/getTop',
+            method: 'get',
+            success: function (obj) {
+                displayTopFive(obj.list);
+                $('#topFiveBlock').fadeIn("slow");
+            }
+        });
+
+    })
 
     $('#b_signIn').click(function(data){
 
@@ -173,6 +185,18 @@ $(document).ready(function(){
 
     }
 
+    function displayTopFive(list){
+
+        if(list == null){
+            return;
+        }
+
+        for (var i=0; i<list.length; i++)
+        {
+            $("#topList").append("<li id="+i+">"+list[i]+"</li><br>");
+        }
+
+    }
     function displaySites(list){
 
         if(list == null){
