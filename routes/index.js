@@ -61,6 +61,7 @@ router.post('/signIn',function(req,res,next) {
       res.end('{"success" : "Updated Successfully", "status" : 200}');
     }else{
       console.log("User Doesn't exist");
+      res.writeHead(200, { 'Content-Type': 'application/json' });
     }
   })
 

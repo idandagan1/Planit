@@ -23,11 +23,9 @@ function setScroll(){
     $(document).ready(function(){
 
         $("#theList").scroll(function(){
-
             var scroll_top = $(this).scrollTop();
             $("#feedback").text(scroll_top);
         })
-
 
         $('#titleSignIn').click(function(){
             $('#signInForm').fadeIn(200);
@@ -66,6 +64,9 @@ $(document).ready(function(){
                     if(numberOfItems === 0){
                         document.getElementById("inst").style.display = "inline-block";
                     }
+                },
+                error: function(err){
+                    alert("You are not registered");
                 }
             });
 

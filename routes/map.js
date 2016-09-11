@@ -16,9 +16,10 @@ router.get('/getData',function(req,res,next){
         return;
     }
 
-    Site.find({'Visitors.Name': currentUser},{SiteName:1},{'Visitors.$': 1}).then(function(visitor, err) {
+    Site.find({'Visitors.Name': currentUser},{SiteName:1},{'Visitors.$': 1})
+        .then(function(sites, err) {
         if(!err) {
-            var listOfSites = visitor;
+            var listOfSites = sites;
             res.send({list: listOfSites});
         }
     });
