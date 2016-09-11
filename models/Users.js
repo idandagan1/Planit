@@ -7,7 +7,6 @@ var assert = require('assert');
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 mongoose.createConnection('localhost:27017/local');
-var Item = require('../models/Items');
 var Schema = mongoose.Schema;
 
 var Users = new Schema({

@@ -354,8 +354,6 @@ function initialize() {
         map.setCenter(initialLocation);
     }
 
-    //var input = (document.getElementById('pac-input'));
-
     // Create the autocomplete helper, and associate it with
     // an HTML text input box.
     var autocomplete = new google.maps.places.Autocomplete(input);
