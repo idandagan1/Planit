@@ -12,7 +12,7 @@ var Users = require('../models/Users');
 
 //Get the data onLoad page.
 router.get('/getData',function(req,res,next){
-
+console.log("df");
     if(currentUser == null){//User is not logged in
         return res.status(404).send("UserName");
     }
@@ -27,6 +27,29 @@ router.get('/getData',function(req,res,next){
             res.send({list:listOfItems});
         });
 })
+
+router.delete('/deleteItem',function(req,res){
+    console.log(req.body.Name);
+    //Users.findOne({UserName: currentUser}, function (err, obj) {
+    //    if (obj !== null) {
+    //        var items = obj.Items;
+    //        Users.
+    //    }
+    //})
+
+    Users.findOneAndUpdate(
+        {UserName: currentUser},
+        {$pull:{Items: {Name: req.body.Name}}},
+        function(err, data){
+            if(err) {
+                console.log("error");
+                return res.status(500).json({'error' : 'error in deleting address'});
+            }
+            res.json(data);
+        }
+    );
+})
+
 //Adding item to the list.
 router.post('/addItem', function(req,res,next) {
     var item = {

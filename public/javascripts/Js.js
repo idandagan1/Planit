@@ -268,7 +268,7 @@ function disapear(){
 
 function deleted(event){
 
-    var itemToDelete = event.textContent;
+    var itemToDelete = {Name: event.textContent};
 
     $.ajax({
         url: '/list.html/deleteItem',
