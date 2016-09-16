@@ -39,7 +39,7 @@ function setScroll(){
     })
 
 }
-//-----------------Page: List------------------------------------------------------------------------------------------------------
+
 var numberOfItems=0;
 var listOfItems = [];
 
@@ -51,7 +51,7 @@ var Item = function(name, quantity)
 
 $(document).ready(function(){
 
-
+//-----------------onLoad Pages------------------------------------------------------------------------------------------------------
     $(window).load(function() {
         if (window.location.pathname == '/list.html') {
 
@@ -66,7 +66,7 @@ $(document).ready(function(){
                     }
                 },
                 error: function(err){
-                    alert("You are not registered");
+                    alert("You need to sign-in!");
                 }
             });
 
@@ -79,25 +79,14 @@ $(document).ready(function(){
                 success: function (obj) {
                     var list = obj.list;
                     displaySites(list);
+                },
+                error: function(err){
+                    alert("You need to sign-in!");
                 }
             });
-
         }
-
     })
-
-    $('#b_getTop').click(function(data){
-
-        $.ajax({
-            url: '/map.html/getTop',
-            method: 'get',
-            success: function (obj) {
-                displayTopFive(obj.list);
-                $('#topFiveBlock').fadeIn("slow");
-            }
-        });
-
-    })
+//-----------------SignIn/Register------------------------------------------------------------------------------------------------------
 
     $('#b_signIn').click(function(data){
 
@@ -109,6 +98,14 @@ $(document).ready(function(){
             success: function (obj) {
                 window.location = '/list.html';
                 window.reload();
+            },
+            error: function(obj){
+                if(obj.responseText == "Empty"){
+                    alert("Sone fields are empty! Please fill out everything.");
+                }else{
+                    alert("User doesn't exist!");
+                }
+
             }
         });
 
@@ -124,36 +121,41 @@ $(document).ready(function(){
             success: function (obj) {
                 window.location = '/list.html';
                 window.reload();
+            },
+            error: function(obj){
+                if(obj.responseText == "Password"){
+                    alert("Password doesn't match.");
+                }else if(obj.responseText == "Email"){
+                    alert("Please fill out a valid Email.");
+                }else{
+                    alert("Username already exist.");
+                }
             }
         });
     })
-
-    $('#b_addSite').click(function(data){
-
-        var userInfo = $('#formSite').serialize();
-        $.ajax({
-            url: '/map.html/addSite',
-            method: 'post',
-            data: userInfo,
-            success: function (obj) {
-                addSite(userInfo);
-            }
-        });
-
-    })
-
+//-------------------List Page------------------------------------------------------------------------------------------------------
     $("#addItem").click(function(){
-
-
+        var input = document.getElementById("item").value;
+        if(input == ""){
+            return;
+        }
         var item = $('#item').serialize();
         $.ajax({
             url: '/list.html/addItem',
             method: 'post',
             data: item,
             success: function (obj) {
+                showItem();
                 console.log("item has been insert");
+            },
+            error: function(obj){
+                alert("You must sign-in!");
             }
         });
+
+    })
+
+    function showItem(){
 
         var name = document.getElementById("item").value;
         if(name != "")
@@ -168,7 +170,7 @@ $(document).ready(function(){
             $(".b_tag:last").animate({"font-size":"16"},80);
 
         }
-    })
+    }
 
     function displayItems(list){
 
@@ -186,6 +188,47 @@ $(document).ready(function(){
 
     }
 
+    $("#b_clearList").click(function(){
+
+        var listLength = listOfItems.length;
+        listOfItems.splice(0,listLength);
+        $("#theList").empty();
+        document.getElementById("totalItems").innerHTML = "Total Items: 0";
+        numberOfItems = 0;
+    })
+
+//-------------------Site Page------------------------------------------------------------------------------------------------------
+
+    $('#b_getTop').click(function(data){
+
+        $.ajax({
+            url: '/map.html/getTop',
+            method: 'get',
+            success: function (obj) {
+                displayTopFive(obj.list);
+                $('#topFiveBlock').fadeIn("slow");
+            }
+        });
+
+    })
+
+    $('#b_addSite').click(function(data){
+
+        var userInfo = $('#formSite').serialize();
+        $.ajax({
+            url: '/map.html/addSite',
+            method: 'post',
+            data: userInfo,
+            success: function (obj) {
+                addSite(userInfo);
+            },
+            error: function(obj){
+                alert("You must sign-in!");
+            }
+        });
+
+    })
+
     function displayTopFive(list){
 
         if(list == null){
@@ -198,6 +241,7 @@ $(document).ready(function(){
         }
 
     }
+
     function displaySites(list){
 
         if(list == null){
@@ -211,25 +255,7 @@ $(document).ready(function(){
 
     }
 
-//-------Clear List-------------------
-    $("#b_clearList").click(function(){
-
-        var listLength = listOfItems.length;
-        listOfItems.splice(0,listLength);
-        //$("li[id^=item]").remove();
-        $("#theList").empty();
-        document.getElementById("totalItems").innerHTML = "Total Items: 0";
-        numberOfItems = 0;
-    })
-
 })
-
-function deleted(event)
-{
-    $(event).remove();
-    numberOfItems-=1;
-    document.getElementById("totalItems").innerHTML = "Total Items: "+numberOfItems;
-}
 
 function disapear(){
     document.getElementById("inst").style.display = "none";
@@ -240,9 +266,23 @@ function disapear(){
 
 }
 
+function deleted(event){
 
+    var itemToDelete = event.textContent;
 
-//-----------------Page: Map-------------------------------------------------------------------------------------------------------
+    $.ajax({
+        url: '/list.html/deleteItem',
+        method: 'delete',
+        data: itemToDelete,
+        success: function (obj) {
+            $(event).remove();
+            numberOfItems-=1;
+            document.getElementById("totalItems").innerHTML = "Total Items: "+numberOfItems;
+        }
+    });
+}
+
+//-----------------Google Maps API-------------------------------------------------------------------------------------------------------
 var indexOfSite;
 var markers = [];
 var marker;

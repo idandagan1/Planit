@@ -11,6 +11,7 @@ var path = require('path');
 /* Register Method */
 router.post('/register', function(req,res,next) {
 
+  //Creating the user.
   var user = {
     UserName: req.body.userName,
     Password: req.body.password,
@@ -18,9 +19,9 @@ router.post('/register', function(req,res,next) {
   };
 
   currentUser = user.UserName;
-
+  //Validation and insert the user.
   if(isPasswordValid(req.body.password,req.body.ConfirmPassword)) {
-    if(req.body.email != null) {
+    if(req.body.email != "") {
       Users.count({"UserName": currentUser})
           .then(function (count) {
             if (count == 0) {
@@ -30,19 +31,23 @@ router.post('/register', function(req,res,next) {
               res.end('{"success" : "Updated Successfully", "status" : 200}');
             } else {
               console.log("User name already exist.");
+              return res.status(404).send("UserName");
             }
           });
-    }else{
+    }else{//Email error
       console.log("Email is required");
-      res.redirect('/');
+      return res.status(404).send("Email");
     }
-  }else{
+  }else{//Pqssword error
     console.log("Password does not match");
-    res.redirect('/');
+    return res.status(404).send("Password");
   }
 });
 
 function isPasswordValid(first, second){
+  if(first == "" || second == ""){
+    return false;
+  }
   return first === second;
 }
 
@@ -53,15 +58,19 @@ router.post('/signIn',function(req,res,next) {
     UserName: req.body.userName,
     Password: req.body.password,
   };
+
+  if(user.UserName == "" || user.Password == ""){
+    return res.status(404).send("Empty");
+  }
   Users.findOne({UserName:user.UserName, Password: user.Password}, function(err,obj){
 
-    if(obj !== null){
+    if(obj !== null){//Log into the website.
       console.log("User logged in!")
       currentUser = user.UserName;
       res.end('{"success" : "Updated Successfully", "status" : 200}');
     }else{
       console.log("User Doesn't exist");
-      res.writeHead(200, { 'Content-Type': 'application/json' });
+      return res.status(404).send("UserName");
     }
   })
 

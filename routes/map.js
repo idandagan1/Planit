@@ -10,10 +10,11 @@ var Schema = mongoose.Schema;
 var Site = require('../models/Sites');
 var Visitor = require('../models/Visitors');
 
+//Get data onLoad page.
 router.get('/getData',function(req,res,next){
 
-    if(currentUser == null){
-        return;
+    if(currentUser == null){//User is not logged in.
+        return res.status(404).send("UserName");
     }
 
     Site.find({'Visitors.Name': currentUser},{SiteName:1},{'Visitors.$': 1})
@@ -21,28 +22,42 @@ router.get('/getData',function(req,res,next){
         if(!err) {
             var listOfSites = sites;
             res.send({list: listOfSites});
+        }else{
+            return res.status(404).send("UserName");
         }
     });
 
 })
+
+//Get top 5 most visited sites.
 router.get('/getTop',function(req,res,next){
 
     var topFive = [];
+
     Site.find({},{SiteName:1, Visitors:1}).then(function(sites,err){
-        sites.sort(function(a, b){
-            return b.Visitors.length - a.Visitors.length});
-        for(var i=0; i<sites.length && i<5;i++){
-            topFive.push(sites[i].SiteName);
+
+        if(sites == null || sites.length == 0) {
+            console.log("Site list is empty.");
+            return res.status(404).send("Empty Sites");
+        }else{
+            sites.sort(function (a, b) {
+                return b.Visitors.length - a.Visitors.length
+            });
+            for (var i = 0; i < sites.length && i < 5; i++) {
+                topFive.push(sites[i].SiteName);
+            }
+            res.send({list: topFive});
         }
-        res.send({list: topFive});
     })
 })
 
+//Adding site to the list.
 router.post('/addSite', function(req,res,next){
 
     if(currentUser==null){
-        return;
+        return res.status(404).send("UserName");
     }
+    //Creating the site to insert.
     var site = {
         SiteName: req.body.sitename,
         Address: req.body.siteaddress
@@ -80,7 +95,7 @@ function isSiteValid(site)
     }
 
 }
-
+//actual method for inserting the site.
 function addSite(site,visitor){
     var newSite = new Site(site);
     newSite.Visitors.push(visitor);
