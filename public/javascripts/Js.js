@@ -88,36 +88,54 @@ $(document).ready(function(){
     })
 //-----------------SignIn/Register------------------------------------------------------------------------------------------------------
 
-    $('#b_signIn').click(function(data){
+    $('#signInForm').on('submit', function(e) {
+        e.preventDefault();
 
-        var userInfo = $('#signInForm').serialize();
+        // get the form data
+        var formData = {
+            'UserName' : $('input[name=UserName]').val(),
+            'Password' : $('input[name=Password]').val()
+        };
+
+        // Process the form
         $.ajax({
-            url: '/signIn',
-            method: 'post',
-            data: userInfo,
+            type : 'POST', // define the type of HTTP verb we want to use (POST for our form)
+            url : '/signIn', // the url where we want to POST
+            data : formData, // our data object
+            dataType : 'json', // what type of data do we expect back from the server
+            encode : true,
             success: function (obj) {
                 window.location = '/list.html';
                 window.reload();
             },
             error: function(obj){
                 if(obj.responseText == "Empty"){
-                    alert("Sone fields are empty! Please fill out everything.");
+                    alert("Some fields are empty! Please fill out everything.");
                 }else{
                     alert("User doesn't exist!");
                 }
-
             }
-        });
+        })
+    });
 
-    })
+    $('#registerForm').on('submit', function(e) {
+        e.preventDefault();
 
-    $('#b_register').click(function(data){
+        // get the form data
+        var formData = {
+            'UserName' : $('input[name=regUserName]').val(),
+            'Password' : $('input[name=regPassword]').val(),
+            'ConfirmPassword' : $('input[name=confirmPassword]').val(),
+            'Email' : $('input[name=email]').val()
+        };
 
-        var userInfo = $('#registerForm').serialize();
+        // Process the form
         $.ajax({
-            url: '/register',
-            method: 'post',
-            data: userInfo,
+            type : 'POST', // define the type of HTTP verb we want to use (POST for our form)
+            url : '/register', // the url where we want to POST
+            data : formData, // our data object
+            dataType : 'json', // what type of data do we expect back from the server
+            encode : true,
             success: function (obj) {
                 window.location = '/list.html';
                 window.reload();
@@ -131,19 +149,31 @@ $(document).ready(function(){
                     alert("Username already exist.");
                 }
             }
-        });
-    })
+        })
+    });
+
 //-------------------List Page------------------------------------------------------------------------------------------------------
     $("#addItem").click(function(){
-        var input = document.getElementById("item").value;
+        var itemName = document.getElementById("item").value;
+        var quantity = document.getElementById("quantity").value;
+
         if(input == ""){
             return;
         }
-        var item = $('#item').serialize();
+
+        var item = {
+            'Name': itemName,
+            'Quantity': quantity
+        }
+
+        var jsonItem = JSON.stringify(item, null, 2);
+
         $.ajax({
             url: '/list.html/addItem',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
             method: 'post',
-            data: item,
+            data: jsonItem,
             success: function (obj) {
                 showItem();
                 console.log("item has been insert");
@@ -158,13 +188,15 @@ $(document).ready(function(){
     function showItem(){
 
         var name = document.getElementById("item").value;
+        var quantity = document.getElementById("quantity").value;
+        var display = name+" X "+quantity
         if(name != "")
         {
             numberOfItems++;
             var new_Item = new Item(name);
             document.getElementById("totalItems").innerHTML = "Total Items: "+numberOfItems;
             listOfItems.push(new_Item);
-            $("#theList").append("<li id=item class=b_tag onclick=deleted(this)>"+name+"</li>");
+            $("#theList").append("<li id="+name+" class=b_tag onclick=deleted(this) value="+name+">"+display+"</li>");
             document.getElementById("item").value = "";
             $(".b_tag:last").animate({"font-size":"25"},100);
             $(".b_tag:last").animate({"font-size":"16"},80);
@@ -180,12 +212,10 @@ $(document).ready(function(){
 
         for (var i=0; i<list.length; i++)
         {
-            $("#theList").append("<li id=item" + i + " class=b_tag onclick=deleted(this)>" + list[i].Name + "</li>");
-            document.getElementById("item"+i).value = "";
+            $("#theList").append("<li id=item" + i + " class=b_tag onclick=deleted(this) value="+list[i].Name+">" + list[i].Name + " X " + list[i].Quantity +"</li>");
             numberOfItems = list.length;
             document.getElementById("totalItems").innerHTML = "Total Items: "+list.length;
         }
-
     }
 
     $("#b_clearList").click(function(){
@@ -212,22 +242,30 @@ $(document).ready(function(){
 
     })
 
-    $('#b_addSite').click(function(data){
+    $('#formSite').on('submit', function(e) {
+        e.preventDefault();
+        // get the form data
+        var formData = {
+            'SiteName' : $('input[name=sitename]').val(),
+            'Address' : $('input[name=siteaddress]').val(),
+            'Cost' : $('input[name=sitecost]').val()
+        };
 
-        var userInfo = $('#formSite').serialize();
+        // Process the form
         $.ajax({
-            url: '/map.html/addSite',
-            method: 'post',
-            data: userInfo,
+            type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
+            url         : '/map.html/addSite', // the url where we want to POST
+            data        : formData, // our data object
+            dataType    : 'json', // what type of data do we expect back from the server
+            encode          : true,
             success: function (obj) {
-                addSite(userInfo);
+                addSite(formData);
             },
             error: function(obj){
                 alert("You must sign-in!");
             }
-        });
-
-    })
+        })
+    });
 
     function displayTopFive(list){
 
@@ -248,11 +286,14 @@ $(document).ready(function(){
             return;
         }
 
+        listOfSites = list;
+
         for (var i=0; i<list.length; i++)
         {
             $("#siteList").append("<li id="+i+" onclick=getSite(this) >"+list[i].SiteName+"</li><br>");
+            totalCost += list[i].Visitors[0].Cost;
         }
-
+        document.getElementById("totalCost").innerHTML = "Total Cost = "+totalCost+" $";
     }
 
 })
@@ -268,12 +309,18 @@ function disapear(){
 
 function deleted(event){
 
-    var itemToDelete = event.textContent;
+    var item = {
+        'Name': event.getAttribute("value")
+    }
+
+    var jsonItem = JSON.stringify(item, null, 2);
 
     $.ajax({
         url: '/list.html/deleteItem',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
         method: 'delete',
-        data: itemToDelete,
+        data: jsonItem,
         success: function (obj) {
             $(event).remove();
             numberOfItems-=1;
@@ -321,28 +368,24 @@ function showMap(){
     $(".mapWrap").css({"z-index":"1"},100);
 }
 
-function addSite(event)//Adding the site to the list.
+function addSite(site)//Adding the site to the list.
 {
-
-    var new_location = document.getElementById("pac-input").value;
-    var new_nickname = document.getElementById("SiteName").value;
-    var new_cost = document.getElementById("cost").value;
-    if(new_location == "" || new_nickname== "")
+    if(site.Address == "" || site.SiteName == "")
     {
         showAttention();
     }
     else
     {
         showMap();
-        if(new_cost != "")
+        if(site.Cost != "")
         {
-            totalCost+=parseFloat(new_cost);
+            totalCost+=parseFloat(site.Cost);
             document.getElementById("totalCost").innerHTML = "Total Cost = "+totalCost+" $";
             $("#totalCost").animate({'font-size':'25'},100);
             $("#totalCost").animate({'font-size':'20'},70);
         }
 
-        var newSite = new Site(new_nickname,new_location,new_cost);
+        var newSite = new Site(site.SiteName ,site.Address ,site.Cost);
         listOfSites.push(newSite);
         document.getElementById("SiteName").value="";
         document.getElementById("pac-input").value="";

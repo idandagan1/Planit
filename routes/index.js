@@ -11,17 +11,12 @@ var path = require('path');
 /* Register Method */
 router.post('/register', function(req,res,next) {
 
-  //Creating the user.
-  var user = {
-    UserName: req.body.userName,
-    Password: req.body.password,
-    Email: req.body.email,
-  };
+  var user = req.body;
 
   currentUser = user.UserName;
   //Validation and insert the user.
-  if(isPasswordValid(req.body.password,req.body.ConfirmPassword)) {
-    if(req.body.email != "") {
+  if(isPasswordValid(user.Password,user.ConfirmPassword)) {
+    if(user.Email != "") {
       Users.count({"UserName": currentUser})
           .then(function (count) {
             if (count == 0) {
@@ -54,10 +49,7 @@ function isPasswordValid(first, second){
 /* Sign-In Method */
 router.post('/signIn',function(req,res,next) {
 
-  var user = {
-    UserName: req.body.userName,
-    Password: req.body.password,
-  };
+  var user = req.body;
 
   if(user.UserName == "" || user.Password == ""){
     return res.status(404).send("Empty");
@@ -67,7 +59,7 @@ router.post('/signIn',function(req,res,next) {
     if(obj !== null){//Log into the website.
       console.log("User logged in!")
       currentUser = user.UserName;
-      res.end('{"success" : "Updated Successfully", "status" : 200}');
+      res.end('{"success" : "Sign-In Successfully", "status" : 200}');
     }else{
       console.log("User Doesn't exist");
       return res.status(404).send("UserName");

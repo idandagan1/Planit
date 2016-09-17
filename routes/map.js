@@ -17,7 +17,7 @@ router.get('/getData',function(req,res,next){
         return res.status(404).send("UserName");
     }
 
-    Site.find({'Visitors.Name': currentUser},{SiteName:1},{'Visitors.$': 1})
+    Site.find({'Visitors.Name': currentUser},{SiteName:1 , 'Visitors':1},{'Visitors.$': 1})
         .then(function(sites, err) {
         if(!err) {
             var listOfSites = sites;
@@ -54,20 +54,18 @@ router.get('/getTop',function(req,res,next){
 //Adding site to the list.
 router.post('/addSite', function(req,res,next){
 
-    if(currentUser==null){
+    if(currentUser == null){
         return res.status(404).send("UserName");
     }
+
     //Creating the site to insert.
-    var site = {
-        SiteName: req.body.sitename,
-        Address: req.body.siteaddress
-    };
+    var site = req.body;
 
     if(isSiteValid(site)){
 
         var visitor = {
             Name: currentUser,
-            Cost: req.body.sitecost
+            Cost: site.Cost
         };
 
         var newVisitor = new Visitor(visitor);
@@ -83,7 +81,6 @@ router.post('/addSite', function(req,res,next){
         });
     }
 
-    res.redirect('/');
 });
 
 function isSiteValid(site)
