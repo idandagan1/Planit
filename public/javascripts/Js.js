@@ -145,8 +145,10 @@ $(document).ready(function(){
                     alert("Password doesn't match.");
                 }else if(obj.responseText == "Email"){
                     alert("Please fill out a valid Email.");
-                }else{
+                }else if(obj.responseText =="UserName"){
                     alert("Username already exist.");
+                }else{
+                    alert("We have encountered in some problems, please try again later.")
                 }
             }
         })
@@ -432,7 +434,6 @@ $("#b_clearSite").click(function(){
 })
 
 //-----------------Auto Complete-----------------------------
-
 
 function initialize() {
 
