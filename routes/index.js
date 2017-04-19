@@ -1,27 +1,23 @@
-var express = require('express');
-var router = express.Router();
-var assert = require('assert');
-var mongoose = require('mongoose');
+import express from 'express';
+const router = express.Router();
+import mongoose from 'mongoose';
+import Users from '../models/Users';
 mongoose.Promise = global.Promise;
-mongoose.createConnection('localhost:27017/local');
 
-var Users = require('../models/Users');
-var path = require('path');
 
 /* Register Method */
-router.post('/register', function(req,res,next) {
+router.post('/register', (req,res) => {
 
-  var user = req.body;
+  const user = req.body;
 
-  currentUser = user.UserName;
-  //Validation and insert the user.
-  if(isPasswordValid(user.Password,user.ConfirmPassword)) {
-    if(user.Email != "") {
-      Users.count({"UserName": currentUser})
-          .then(function (count) {
+  if(isPasswordValid(user.password, user.ConfirmPassword)) {
+    if(user.email != "") {
+      Users.count({"UserName": user.username})
+          .then((count) => {
             if (count == 0) {
-              var data = new Users(user);
+              let data = new Users(user);
               data.save();
+              currentUser = data._id;
               console.log("New user has been insert!");
               res.end('{"success" : "Updated Successfully", "status" : 200}');
             } else {
@@ -47,18 +43,18 @@ function isPasswordValid(first, second){
 }
 
 /* Sign-In Method */
-router.post('/signIn',function(req,res,next) {
+router.post('/signIn', (req,res) => {
 
-  var user = req.body;
+  const user = req.body;
 
   if(user.UserName == "" || user.Password == ""){
     return res.status(404).send("Empty");
   }
-  Users.findOne({UserName:user.UserName, Password: user.Password}, function(err,obj){
+  Users.findOne({UserName:user.UserName, Password: user.Password}, (err,obj) => {
 
-    if(obj !== null){//Log into the website.
+    if(obj){
       console.log("User logged in!")
-      currentUser = user.UserName;
+      currentUser = obj._id;
       res.end('{"success" : "Sign-In Successfully", "status" : 200}');
     }else{
       console.log("User Doesn't exist");
