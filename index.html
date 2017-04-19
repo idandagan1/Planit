@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Plan It</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="public/stylesheets/style.css">
+</head>
+<body class="n_back">
+<section class="navTitle">
+    <ul>
+        <a href="index.html"><li>Home</li></a>
+        <a href="list.html" id="listNav"><li>List</li></a>
+        <a href="map.html"><li>Sites</li></a>
+    </ul>
+</section>
+<section class="n_menuList">
+    <form class="main_title">
+        <h2>going for a trip?</h2>
+        <h1>Plan It!</h1>
+        <a id="b_start" class="startplaning">Start Planning</a>
+    </form>
+</section>
+<section class="n_navbar">
+    <div id="startPlan">
+        <p>Start Planing</p>
+    </div></br>
+
+    <div class="navigateTo">
+        <a id="titleSignIn" class="signIn" >Sign In</a>
+        <form id="signInForm" class="homepagestyle"></br>
+            <p>User Name:</p>
+            <input type="text" id="_username" class="txtInput" name="userName" required>
+            <p>Password:</p>
+            <input type="password" id="_password" class="txtInput" name="password" required>
+            <button id="b_signIn" type="submit" class="b_general" value="Sign In">Sign In</button>
+            <div class="listPic"></div>
+        </form>
+    </div>
+    <div class="navigateTo">
+        <a id="titleRegister" class="signIn" >Register</a>
+        <form id="registerForm" class="homepagestyle"></br>
+            <p>User Name:</p>
+            <input type="text" class="txtInput" name="regUserName" required>
+            <p>Password:</p>
+            <input type="password" class="txtInput" name="regPassword" required>
+            <p>Confirm Password:</p>
+            <input type="password" class="txtInput" name="confirmPassword" required>
+            <p>Email:</p>
+            <input type="email" class="txtInput" name="email" required>
+            <button id="submit" type="submit" class="b_general" value="Register">Register</button>
+        </form>
+    </div>
+</section>
+</body>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script src="./controllers/index.js"></script>
+
+</html>
