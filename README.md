@@ -5,6 +5,7 @@ In the app you can:
 1. Create a list of items to pack.
 2. Create a list of places that you wish to visit (Including there address on the map).
 
+
 Technologies:
 1. JavaScript (ES6)
 2. Node.js + Express
