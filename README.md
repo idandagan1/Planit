@@ -1,15 +1,18 @@
 # Planit
 Planning a vacation? come and plan it with this cool app.
 
-In the app you can:
-1. Create a list of items to pack.
-2. Create a list of places that you wish to visit (Including there address on the map).
+### In the app you can:
+* Create a list of items to pack.
+* Create a list of places that you wish to visit (Including there address on the map).
+
+# Run the app:
+* Run `npm start`
 
 
-Technologies:
-1. JavaScript (ES6)
-2. Node.js + Express
-3. MongoDB
-4. jQuery
-5. HTML5/CSS3
+### Technologies:
+* JavaScript (ES6)
+* Node.js + Express
+* MongoDB
+* jQuery
+* HTML5/CSS3
 
