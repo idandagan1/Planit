@@ -17,13 +17,13 @@ const Users = new Schema({
     },
     Items:[
         {
-        id:{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Items'},
-        name: {
-            type: String
-        }
-    }]
-}, {collection: 'Users'});
+            id:{
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Items' },
+            name: {
+                type: String
+            }
+        }]
+}, { collection: 'Users' });
 
 module.exports = mongoose.model('Users', Users);

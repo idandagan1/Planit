@@ -11,7 +11,7 @@ const Visitors = new Schema({
         type: Number,
         required: false
     },
-}, {collection: 'Visitors'});
+}, { collection: 'Visitors' });
 
 module.exports = mongoose.model('Visitors', Visitors);
 

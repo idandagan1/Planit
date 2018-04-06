@@ -1,31 +1,31 @@
-function showBox()
-{
-    $("makingList").style.display = "";
+function showBox() {
+    $('makingList').style.display = '';
 }
 
-$(document).ready(function(){
+$(document).ready(function (){
     setScroll();
 });
+
 function setScroll(){
 
-    $("#b_start").click(function(){
+    $('#b_start').click(function (){
 
-        $("body").animate({scrollTop: $(".n_navbar").offset().top},1500);
+        $('body').animate({ scrollTop: $('.n_navbar').offset().top },1500);
     })
 
-    $(document).ready(function(){
+    $(document).ready(function (){
 
-        $("#theList").scroll(function(){
+        $('#theList').scroll(function (){
             var scroll_top = $(this).scrollTop();
-            $("#feedback").text(scroll_top);
+            $('#feedback').text(scroll_top);
         })
 
-        $('#titleSignIn').click(function(){
+        $('#titleSignIn').click(function (){
             $('#signInForm').fadeIn(200);
             $('#registerForm').fadeOut(200);
         })
 
-        $('#titleRegister').click(function(){
+        $('#titleRegister').click(function (){
             $('#registerForm').fadeIn(200);
             $('#signInForm').fadeOut(200);
         })
@@ -33,7 +33,7 @@ function setScroll(){
 
 }
 
-$('#signInForm').on('submit', function(e) {
+$('#signInForm').on('submit', function (e) {
     e.preventDefault();
 
     // get the form data
@@ -50,20 +50,20 @@ $('#signInForm').on('submit', function(e) {
         dataType : 'json', // what type of data do we expect back from the server
         encode : true,
         success: function (obj) {
-            window.location = '/map.html';
+            window.location = '/sites';
             window.reload();
         },
-        error: function(obj){
-            if(obj.responseText == "Empty"){
-                alert("Some fields are empty! Please fill out everything.");
+        error: function (obj){
+            if(obj.responseText == 'Empty'){
+                alert('Some fields are empty! Please fill out everything.');
             }else{
-                alert("User doesn't exist!");
+                alert('User doesn\'t exist!');
             }
         }
     })
 });
 
-$('#registerForm').on('submit', function(e) {
+$('#registerForm').on('submit', function (e) {
     e.preventDefault();
 
     // get the form data
@@ -82,18 +82,18 @@ $('#registerForm').on('submit', function(e) {
         dataType : 'json', // what type of data do we expect back from the server
         encode : true,
         success: function (obj) {
-            window.location = '/map.html';
+            window.location = '/sites';
             window.reload();
         },
-        error: function(obj){
-            if(obj.responseText == "Password"){
-                alert("Password doesn't match.");
-            }else if(obj.responseText == "Email"){
-                alert("Please fill out a valid Email.");
-            }else if(obj.responseText =="UserName"){
-                alert("Username already exist.");
+        error: function (obj){
+            if(obj.responseText == 'Password'){
+                alert('Password doesn\'t match.');
+            }else if(obj.responseText == 'Email'){
+                alert('Please fill out a valid Email.');
+            }else if(obj.responseText =='UserName'){
+                alert('Username already exist.');
             }else{
-                alert("We have encountered in some problems, please try again later.")
+                alert('We have encountered in some problems, please try again later.')
             }
         }
     })

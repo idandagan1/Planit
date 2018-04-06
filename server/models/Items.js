@@ -7,6 +7,6 @@ const Items = new Schema({
         required: true
     },
     Quantity: Number
-}, {collection: 'list-data'});
+}, { collection: 'list-data' });
 
 module.exports = mongoose.model('Items', Items);

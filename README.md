@@ -8,8 +8,7 @@ Planning a vacation? come and plan it with this cool app.
 ### Run the app:
 * Run `npm start`
 
-
-### Technologies:
+### Stack:
 * JavaScript (ES6)
 * Node.js + Express
 * MongoDB

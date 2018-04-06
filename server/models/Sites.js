@@ -16,6 +16,6 @@ const siteSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Users'
     }]
-}, {collection: 'Sites'});
+}, { collection: 'Sites' });
 
 module.exports = mongoose.model('Sites', siteSchema);
